@@ -13,7 +13,7 @@ namespace SearchEngine.Solver.UnitTest
         {
             var stemmer = new PorterStemmer();
             var res = stemmer.stemTerm("Available");
-            var res2 = stemmer.stemTermToLowerAndClean("available, But ... yoU know what is available");
+            var res2 = stemmer.stemTermToLowerAndClean("available, But ... yoU know what is available at this time");
             Debug.WriteLine("Res2: " + res2);
             var arr = res2.Split(' ');
         }
