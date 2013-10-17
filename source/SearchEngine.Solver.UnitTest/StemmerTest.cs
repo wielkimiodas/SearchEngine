@@ -9,13 +9,12 @@ namespace SearchEngine.Solver.UnitTest
     public class StemmerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void StemmingMethodTest()
         {
             var stemmer = new PorterStemmer();
-            var res = stemmer.stemTerm("Available");
-            var res2 = stemmer.stemTermToLowerAndClean("available, But ... yoU know what is available at this time");
-            Debug.WriteLine("Res2: " + res2);
-            var arr = res2.Split(' ');
+            var res2 = stemmer.stemText("Such an analysis can reveal features that are not easily visible " +
+                                        "from the variations in the individual genes and can lead to a picture of " +
+                                        "expression that is more biologically transparent and accessible to interpretation.");
         }
     }
 }

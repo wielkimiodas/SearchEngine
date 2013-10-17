@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -33,11 +34,20 @@ namespace SearchEngine.Solver.Stemmer
             return getTerm();
         }
 
-        public string stemTermToLowerAndClean(string s)
+        public HashSet<string> stemText(string s)
         {
-            var term = stemTerm(s);
-            var clean = Regex.Replace(term, @"^\w\s", string.Empty);
-            return clean.ToLowerInvariant();            
+            var clean = Regex.Replace(s, @"[^\w\s]", string.Empty);
+            var caseInvariant = clean.ToLowerInvariant();
+            var wordsArray = caseInvariant.Split(' ');
+            for (var i = 0; i < wordsArray.Length; i++)
+            {
+                wordsArray[i] = stemTerm(wordsArray[i]);
+            }
+            //removes duplicates
+            var hashSet = new HashSet<string>(wordsArray);
+            //removes empty element
+            hashSet.RemoveWhere(string.IsNullOrEmpty);
+            return hashSet;
         }
 
         /*
@@ -474,7 +484,7 @@ namespace SearchEngine.Solver.Stemmer
          * getResultLength()/getResultBuffer() or toString().
          */
 
-#endregion
+        #endregion
 
         public void stem()
         {
