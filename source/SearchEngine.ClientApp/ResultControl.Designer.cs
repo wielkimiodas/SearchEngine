@@ -48,7 +48,7 @@
             // btShowOrigin
             // 
             this.btShowOrigin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btShowOrigin.Location = new System.Drawing.Point(308, 83);
+            this.btShowOrigin.Location = new System.Drawing.Point(308, 77);
             this.btShowOrigin.Name = "btShowOrigin";
             this.btShowOrigin.Size = new System.Drawing.Size(75, 23);
             this.btShowOrigin.TabIndex = 1;
@@ -59,7 +59,7 @@
             // btStemmed
             // 
             this.btStemmed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStemmed.Location = new System.Drawing.Point(227, 83);
+            this.btStemmed.Location = new System.Drawing.Point(227, 77);
             this.btStemmed.Name = "btStemmed";
             this.btStemmed.Size = new System.Drawing.Size(75, 23);
             this.btStemmed.TabIndex = 2;
@@ -72,7 +72,7 @@
             this.lblSimilarity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSimilarity.AutoSize = true;
             this.lblSimilarity.Font = new System.Drawing.Font("Adobe Fangsong Std R", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSimilarity.Location = new System.Drawing.Point(3, 83);
+            this.lblSimilarity.Location = new System.Drawing.Point(3, 77);
             this.lblSimilarity.Name = "lblSimilarity";
             this.lblSimilarity.Size = new System.Drawing.Size(81, 20);
             this.lblSimilarity.TabIndex = 3;
@@ -83,7 +83,7 @@
             this.lblSimValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSimValue.AutoSize = true;
             this.lblSimValue.Font = new System.Drawing.Font("Adobe Fangsong Std R", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSimValue.Location = new System.Drawing.Point(90, 83);
+            this.lblSimValue.Location = new System.Drawing.Point(90, 77);
             this.lblSimValue.Name = "lblSimValue";
             this.lblSimValue.Size = new System.Drawing.Size(62, 20);
             this.lblSimValue.TabIndex = 4;
@@ -94,6 +94,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Controls.Add(this.lblSimValue);
             this.Controls.Add(this.lblSimilarity);
@@ -101,7 +102,7 @@
             this.Controls.Add(this.btShowOrigin);
             this.Controls.Add(this.lblTitle);
             this.Name = "ResultControl";
-            this.Size = new System.Drawing.Size(383, 106);
+            this.Size = new System.Drawing.Size(383, 100);
             this.ResumeLayout(false);
             this.PerformLayout();
 

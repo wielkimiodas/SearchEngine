@@ -21,8 +21,8 @@ namespace SearchEngine.ClientApp
             _document = document;
             //AutoSize = true;
             
-            //Anchor = (AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
-            Dock = DockStyle.Top;            
+            Anchor = (AnchorStyles.Right | AnchorStyles.Left);
+            Dock = DockStyle.Fill;            
         }
 
         protected override void OnLoad(EventArgs e)
