@@ -20,14 +20,14 @@ namespace SearchEngine.ClientApp
         }
 
         private List<Document> documents;
-        private List<string> keywords;
+        private List<Keyword> keywords;
 
         private void Test()
         {
             var doc1 = new Document()
             {
                 Content = "To jest treść",
-                ContentStemmed = "wystemowana treść",
+                ContentStemmed = new HashSet<string>() { "wystemowana treść" },
                 Similarity = 0.7f,
                 Title = "Mój super artykuł!"
             };
@@ -35,7 +35,7 @@ namespace SearchEngine.ClientApp
             var doc2 = new Document()
             {
                 Content = "To jest treść2",
-                ContentStemmed = "wystemowana treść2",
+                ContentStemmed = new HashSet<string>() { "wystemowana treść2" },
                 Similarity = 0.12f,
                 Title = "A to inny artykuł!"
             };
@@ -43,7 +43,7 @@ namespace SearchEngine.ClientApp
             var doc3 = new Document()
             {
                 Content = "To jest treść3",
-                ContentStemmed = "wystemowana treść3",
+                ContentStemmed = new HashSet<string>(){"wystemowana treść3"},
                 Similarity = 0.12f,
                 Title = "A to trzeci artykuł!"
             };

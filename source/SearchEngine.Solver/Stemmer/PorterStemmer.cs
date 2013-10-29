@@ -36,8 +36,10 @@ namespace SearchEngine.Solver.Stemmer
 
         public HashSet<string> stemText(string s)
         {
+            var unentered = s.Replace(Environment.NewLine, " ");
             //eliminates everything which is not a word or space
-            var clean = Regex.Replace(s, @"[^\w\s]", string.Empty);
+            var clean = Regex.Replace(unentered, @"[^\w\s]|", string.Empty);
+
             //changes big letters to low
             var caseInvariant = clean.ToLowerInvariant();
             var wordsArray = caseInvariant.Split(' ');

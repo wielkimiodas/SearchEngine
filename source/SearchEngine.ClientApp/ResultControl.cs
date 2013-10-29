@@ -44,7 +44,7 @@ namespace SearchEngine.ClientApp
 
         private void btStemmed_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_document.ContentStemmed);
+            MessageBox.Show(_document.ContentStemmed.ToString());
         }
     }
 }

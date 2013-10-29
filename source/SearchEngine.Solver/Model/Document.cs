@@ -10,7 +10,7 @@ namespace SearchEngine.Solver.Model
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public string ContentStemmed { get; set; }
+        public HashSet<string> ContentStemmed { get; set; }
         public float Similarity { get; set; }
     }
 }
