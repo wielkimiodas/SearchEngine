@@ -52,10 +52,16 @@
     <Compile Include="Stemmer\StemmerInterface.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="input\documents-lab1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="input\documents.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="input\documentsFruit.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\keywords-lab1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="input\keywords.txt">

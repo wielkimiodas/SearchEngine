@@ -14,8 +14,8 @@ namespace SearchEngine.Solver
 
         public SearchPerformer()
         {
-            keywords = DataReader.LoadKeywords(@"input\keywords.txt");
-            documents = DataReader.LoadDocuments(@"input\documents.txt");
+            keywords = DataReader.LoadKeywords(@"input\keywords-lab1.txt");
+            documents = DataReader.LoadDocuments(@"input\documents-lab1.txt");
         }
 
         public List<Document> Search(Query query)

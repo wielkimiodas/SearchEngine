@@ -21,6 +21,15 @@ namespace SearchEngine.ClientApp
         {
             InitializeComponent();
             searcher = new SearchPerformer();
+            tbQuery.KeyDown += tbQuery_KeyDown;
+        }
+
+        void tbQuery_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                btSearch.PerformClick();
+            }
         }
 
         private void btClose_Click(object sender, EventArgs e)

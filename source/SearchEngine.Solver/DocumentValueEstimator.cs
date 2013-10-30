@@ -18,7 +18,9 @@ namespace SearchEngine.Solver
                     res += idfRes.Value * queryFreq[idfRes.Key];
             }
 
-            res /= query.VectorLength*document.VectorLength;
+            var denominator = query.VectorLength * document.VectorLength;
+            if (denominator == 0) res = 0;
+            else res /= denominator;
             document.Similarity = res;
         }
 
