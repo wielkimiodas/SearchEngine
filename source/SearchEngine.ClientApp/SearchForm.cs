@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SearchEngine.Solver;
 using SearchEngine.Solver.Model;
 
 namespace SearchEngine.ClientApp
@@ -19,47 +20,7 @@ namespace SearchEngine.ClientApp
         }
 
         private List<Document> documents;
-        private List<Keyword> keywords;
-
-        private void Test()
-        {
-            //var doc1 = new Document()
-            //{
-            //    Content = "To jest treść",
-            //    ContentStemmed = new List<string> { "wystemowana treść" },
-            //    Similarity = 0.7f,
-            //    Title = "Mój super artykuł!"
-            //};
-
-            //var doc2 = new Document()
-            //{
-            //    Content = "To jest treść2",
-            //    ContentStemmed = new List<string> { "wystemowana treść2" },
-            //    Similarity = 0.12f,
-            //    Title = "A to inny artykuł!"
-            //};
-
-            //var doc3 = new Document()
-            //{
-            //    Content = "To jest treść3",
-            //    ContentStemmed = new List<string>{"wystemowana treść3"},
-            //    Similarity = 0.12f,
-            //    Title = "A to trzeci artykuł!"
-            //};
-
-            //var res1 = new ResultControl(doc1);
-            ////res1.Dock = DockStyle.Top;
-            ////res1.Anchor = (AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
-            //var res2 = new ResultControl(doc2);
-            //var res3 = new ResultControl(doc3);
-
-            
-            //resultsLayoutPanel.Controls.Add(res1,0,0);
-            //resultsLayoutPanel.Controls.Add(res2,0,1);
-            //resultsLayoutPanel.Controls.Add(res3,0,2);
-
-            //resultsLayoutPanel.Refresh();
-        }
+        public List<Keyword> keywords;
 
         private void btClose_Click(object sender, EventArgs e)
         {
@@ -69,6 +30,9 @@ namespace SearchEngine.ClientApp
         private void btSearch_Click(object sender, EventArgs e)
         {
             var query = new Query(tbQuery.Text);
+            DocumentValueEstimator.CompareDocumentsToQuery(documents, query);
+            ReloadDocsView();
+
         }
 
         private void loadDocumentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,7 +40,9 @@ namespace SearchEngine.ClientApp
             statusStripMain.Text = "Loading documents...";
             try
             {
-                documents = DataReader.LoadDocuments(GetFilePathToOpen());
+                var path = GetFilePathToOpen();
+                if (path != null)
+                    documents = DataReader.LoadDocuments(path);
             }
             catch (Exception ex)
             {
@@ -90,7 +56,9 @@ namespace SearchEngine.ClientApp
         {
             try
             {
-                keywords = DataReader.LoadKeywords(GetFilePathToOpen());
+                var path = GetFilePathToOpen();
+                if (path != null)
+                    keywords = DataReader.LoadKeywords(path);
             }
             catch (Exception ex)
             {
@@ -110,6 +78,14 @@ namespace SearchEngine.ClientApp
                 }
             }
             return path;
+        }
+
+        private void ReloadDocsView()
+        {
+            resultsLayoutPanel.Controls.Clear();
+            documents.Sort();
+            for(int i=0;i<10;i++)
+                resultsLayoutPanel.Controls.Add(new ResultControl(documents[i]));
         }
 
     }

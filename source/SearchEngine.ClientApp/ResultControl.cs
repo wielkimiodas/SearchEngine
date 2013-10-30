@@ -20,15 +20,15 @@ namespace SearchEngine.ClientApp
             InitializeComponent();
             _document = document;
             //AutoSize = true;
-            
+
             Anchor = (AnchorStyles.Right | AnchorStyles.Left);
-            Dock = DockStyle.Fill;            
+            Dock = DockStyle.Fill;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            
+
             //Width = Parent.Width;
             if (_document != null)
             {
@@ -44,7 +44,13 @@ namespace SearchEngine.ClientApp
 
         private void btStemmed_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_document.ContentStemmed.ToString());
+            string res = null;
+            foreach (var record in _document.ContentStemmed)
+            {
+                res += record + " ";
+            }
+            if (res != null)
+                MessageBox.Show(_document.ContentStemmed.ToString());
         }
     }
 }

@@ -7,11 +7,11 @@ using SearchEngine.Solver.Stemmer;
 
 namespace SearchEngine.Solver.Model
 {
-    public sealed class Document : TfidfBase
+    public sealed class Document : TfidfBase, IComparable<Document>
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public float Similarity { get; set; }
+        public double Similarity { get; set; }
 
         public Document(string paragraph)
         {
@@ -32,6 +32,13 @@ namespace SearchEngine.Solver.Model
             {
                 Content += docLines[i];
             }
+        }
+
+        public int CompareTo(Document that)
+        {
+            if (Similarity == that.Similarity) return 0;
+            if (Similarity > that.Similarity) return -1;
+            return 1;
         }
     }
 }

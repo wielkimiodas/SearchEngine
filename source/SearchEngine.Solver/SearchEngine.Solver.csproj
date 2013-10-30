@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentValueEstimator.cs" />
     <Compile Include="MathUtils.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\TfidfBase.cs" />
