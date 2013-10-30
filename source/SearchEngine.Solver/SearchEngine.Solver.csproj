@@ -40,14 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataReader.cs" />
     <Compile Include="DocumentValueEstimator.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\TfidfBase.cs" />
     <Compile Include="Model\Keyword.cs" />
     <Compile Include="Model\Query.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchPerformer.cs" />
     <Compile Include="Stemmer\PorterStemmer.cs" />
     <Compile Include="Stemmer\StemmerInterface.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="documents.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="keywords.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,16 +14,14 @@ namespace SearchEngine.ClientApp
 {
     public partial class SearchForm : Form
     {
+        private SearchPerformer searcher;
+        private List<Document> topTenDocuments; 
+
         public SearchForm()
         {
             InitializeComponent();
-            keywords = DataReader.LoadKeywords("keywords.txt");
-            documents = DataReader.LoadDocuments("documents.txt");
+            searcher = new SearchPerformer();
         }
-
-        private List<Document> documents;
-        public List<Keyword> keywords;
-        private Dictionary<string, double> InverseDocumentFrequency; 
 
         private void btClose_Click(object sender, EventArgs e)
         {
@@ -33,10 +31,8 @@ namespace SearchEngine.ClientApp
         private void btSearch_Click(object sender, EventArgs e)
         {
             var query = new Query(tbQuery.Text);
-            ComputeIdf();
-            DocumentValueEstimator.CompareDocumentsToQuery(documents, query);
+            topTenDocuments = searcher.Search(query);
             ReloadDocsView();
-
         }
 
         private void loadDocumentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,7 +42,7 @@ namespace SearchEngine.ClientApp
             {
                 var path = GetFilePathToOpen();
                 if (path != null)
-                    documents = DataReader.LoadDocuments(path);
+                    searcher.SetNewDocuments(path);
             }
             catch (Exception ex)
             {
@@ -61,8 +57,7 @@ namespace SearchEngine.ClientApp
             try
             {
                 var path = GetFilePathToOpen();
-                if (path != null)
-                    keywords = DataReader.LoadKeywords(path);
+                searcher.SetNewKeywords(path);
             }
             catch (Exception ex)
             {
@@ -87,35 +82,8 @@ namespace SearchEngine.ClientApp
         private void ReloadDocsView()
         {
             resultsLayoutPanel.Controls.Clear();
-            documents.Sort();
-            for(int i=0;i<10;i++)
-                resultsLayoutPanel.Controls.Add(new ResultControl(documents[i]));
-        }
-
-
-        private void ComputeIdf()
-        {
-            InverseDocumentFrequency = new Dictionary<string, double>();
-            var docAmount = documents.Count;
-            foreach (var key in keywords)
-            {
-                int occ = 0;
-                foreach (var doc in documents)
-                {
-                    if (doc.BagOfWords.ContainsKey(key.Value))
-                    {
-                        if (doc.BagOfWords[key.Value] > 0)
-                            occ++;
-                    }
-                }
-                double idf;
-                if (occ == 0) idf = 0;
-                else idf = Math.Log10(docAmount/occ);
-                
-                InverseDocumentFrequency.Add(key.Value,idf);
-            }
-
-
+            for(int i=0;i<topTenDocuments.Count;i++)
+                resultsLayoutPanel.Controls.Add(new ResultControl(topTenDocuments[i]));
         }
     }
 }

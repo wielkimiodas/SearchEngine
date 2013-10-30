@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using SearchEngine.Solver.Model;
 using SearchEngine.Solver.Stemmer;
 
-namespace SearchEngine.ClientApp
+namespace SearchEngine.Solver
 {
     class DataReader
     {
