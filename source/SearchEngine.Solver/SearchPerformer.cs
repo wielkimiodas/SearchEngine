@@ -21,6 +21,12 @@ namespace SearchEngine.Solver
         public List<Document> Search(Query query)
         {
             ComputeIdf();
+            foreach (var document in documents)
+            {
+                document.ApplyIdfComputation(InverseDocumentFrequency);
+            }
+            query.ApplyIdfComputation(InverseDocumentFrequency);
+            
             DocumentValueEstimator.CompareDocumentsToQuery(documents, query);
             
             //top ten
@@ -34,10 +40,11 @@ namespace SearchEngine.Solver
         private void ComputeIdf()
         {
             InverseDocumentFrequency = new Dictionary<string, double>();
+            
             var docAmount = documents.Count;
             foreach (var key in keywords)
             {
-                int occ = 0;
+                var occ = 0;
                 foreach (var doc in documents)
                 {
                     if (doc.BagOfWords.ContainsKey(key.Value))
@@ -46,10 +53,7 @@ namespace SearchEngine.Solver
                             occ++;
                     }
                 }
-                double idf;
-                if (occ == 0) idf = 0;
-                else idf = Math.Log10(docAmount / occ);
-
+                var idf = occ == 0 ? 0 : Math.Log10(docAmount / occ);
                 InverseDocumentFrequency.Add(key.Value, idf);
             }
         }

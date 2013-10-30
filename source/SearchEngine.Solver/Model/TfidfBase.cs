@@ -11,6 +11,7 @@ namespace SearchEngine.Solver.Model
         public virtual List<string> ContentStemmed { get; set; }
         public virtual Dictionary<string, double> TermFrequency { get; set; }
         public virtual double VectorLength { get; set; }
+        public virtual Dictionary<string, double> IdfResult { get; set; }
 
         protected virtual void CountOccurances()
         {
@@ -31,8 +32,8 @@ namespace SearchEngine.Solver.Model
         protected virtual void OverallComputation()
         {
             CountOccurances();
-            ComputeTermFreq();            
-            ComputeVectorLength();
+            ComputeTermFreq();
+            //ComputeVectorLength();
         }
 
         protected virtual void ComputeTermFreq()
@@ -53,6 +54,17 @@ namespace SearchEngine.Solver.Model
                 res += Math.Pow(term.Value, 2);
             }
             VectorLength = Math.Sqrt(res);
+        }
+
+        public void ApplyIdfComputation(Dictionary<string, double> idf)
+        {
+            IdfResult = new Dictionary<string, double>();
+            foreach (var record in TermFrequency)
+            {
+                if (idf.ContainsKey(record.Key))
+                    IdfResult.Add(record.Key, record.Value * idf[record.Key]);
+            }
+            ComputeVectorLength();
         }
 
     }

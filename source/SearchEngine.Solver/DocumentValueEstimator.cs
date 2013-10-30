@@ -11,11 +11,11 @@ namespace SearchEngine.Solver
         static void CompareDocumentToQuery(Document document, Query query)
         {
             double res = 0;
-            var queryFreq = query.TermFrequency;
-            foreach (var term in document.TermFrequency)
+            var queryFreq = query.IdfResult;
+            foreach (var idfRes in document.IdfResult)
             {
-                if (queryFreq.ContainsKey(term.Key))
-                res += term.Value*queryFreq[term.Key];
+                if (queryFreq.ContainsKey(idfRes.Key))
+                    res += idfRes.Value * queryFreq[idfRes.Key];
             }
 
             res /= query.VectorLength*document.VectorLength;

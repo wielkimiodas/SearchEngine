@@ -40,5 +40,7 @@ namespace SearchEngine.Solver.Model
             if (Similarity > that.Similarity) return -1;
             return 1;
         }
+
+        
     }
 }
