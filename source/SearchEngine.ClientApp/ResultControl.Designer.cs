@@ -41,14 +41,14 @@
             this.lblTitle.Font = new System.Drawing.Font("Adobe Fangsong Std R", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(383, 40);
+            this.lblTitle.Size = new System.Drawing.Size(500, 40);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "<Title>";
             // 
             // btShowOrigin
             // 
             this.btShowOrigin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btShowOrigin.Location = new System.Drawing.Point(308, 77);
+            this.btShowOrigin.Location = new System.Drawing.Point(425, 77);
             this.btShowOrigin.Name = "btShowOrigin";
             this.btShowOrigin.Size = new System.Drawing.Size(75, 23);
             this.btShowOrigin.TabIndex = 1;
@@ -59,7 +59,7 @@
             // btStemmed
             // 
             this.btStemmed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStemmed.Location = new System.Drawing.Point(227, 77);
+            this.btStemmed.Location = new System.Drawing.Point(344, 77);
             this.btStemmed.Name = "btStemmed";
             this.btStemmed.Size = new System.Drawing.Size(75, 23);
             this.btStemmed.TabIndex = 2;
@@ -102,7 +102,7 @@
             this.Controls.Add(this.btShowOrigin);
             this.Controls.Add(this.lblTitle);
             this.Name = "ResultControl";
-            this.Size = new System.Drawing.Size(383, 100);
+            this.Size = new System.Drawing.Size(500, 100);
             this.ResumeLayout(false);
             this.PerformLayout();
 

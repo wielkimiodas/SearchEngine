@@ -29,5 +29,7 @@ namespace SearchEngine.Solver
                 CompareDocumentToQuery(doc,query);
             }
         }
+
+        
     }
 }

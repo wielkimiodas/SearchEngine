@@ -17,6 +17,8 @@ namespace SearchEngine.ClientApp
         public SearchForm()
         {
             InitializeComponent();
+            keywords = DataReader.LoadKeywords("keywords.txt");
+            documents = DataReader.LoadDocuments("documents.txt");
         }
 
         private List<Document> documents;
@@ -31,6 +33,7 @@ namespace SearchEngine.ClientApp
         private void btSearch_Click(object sender, EventArgs e)
         {
             var query = new Query(tbQuery.Text);
+            ComputeIdf();
             DocumentValueEstimator.CompareDocumentsToQuery(documents, query);
             ReloadDocsView();
 
@@ -105,8 +108,14 @@ namespace SearchEngine.ClientApp
                             occ++;
                     }
                 }
-                InverseDocumentFrequency.Add(key.Value,Math.Log10(docAmount/occ));
+                double idf;
+                if (occ == 0) idf = 0;
+                else idf = Math.Log10(docAmount/occ);
+                
+                InverseDocumentFrequency.Add(key.Value,idf);
             }
+
+
         }
     }
 }

@@ -19,10 +19,10 @@ namespace SearchEngine.ClientApp
         {
             InitializeComponent();
             _document = document;
-            //AutoSize = true;
+            AutoSize = true;
 
-            Anchor = (AnchorStyles.Right | AnchorStyles.Left);
-            Dock = DockStyle.Fill;
+            //Anchor = (AnchorStyles.Right | AnchorStyles.Left);
+            //Dock = DockStyle.Fill;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -39,7 +39,7 @@ namespace SearchEngine.ClientApp
 
         private void btShowOrigin_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_document.Content);
+            MessageBox.Show(_document.Title + Environment.NewLine + _document.Content);
         }
 
         private void btStemmed_Click(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace SearchEngine.ClientApp
                 res += record + " ";
             }
             if (res != null)
-                MessageBox.Show(_document.ContentStemmed.ToString());
+                MessageBox.Show(res);
         }
     }
 }

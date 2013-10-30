@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentValueEstimator.cs" />
-    <Compile Include="MathUtils.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\TfidfBase.cs" />
     <Compile Include="Model\Keyword.cs" />
