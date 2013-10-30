@@ -21,6 +21,7 @@ namespace SearchEngine.ClientApp
 
         private List<Document> documents;
         public List<Keyword> keywords;
+        private Dictionary<string, double> InverseDocumentFrequency; 
 
         private void btClose_Click(object sender, EventArgs e)
         {
@@ -88,5 +89,24 @@ namespace SearchEngine.ClientApp
                 resultsLayoutPanel.Controls.Add(new ResultControl(documents[i]));
         }
 
+
+        private void ComputeIdf()
+        {
+            InverseDocumentFrequency = new Dictionary<string, double>();
+            var docAmount = documents.Count;
+            foreach (var key in keywords)
+            {
+                int occ = 0;
+                foreach (var doc in documents)
+                {
+                    if (doc.BagOfWords.ContainsKey(key.Value))
+                    {
+                        if (doc.BagOfWords[key.Value] > 0)
+                            occ++;
+                    }
+                }
+                InverseDocumentFrequency.Add(key.Value,Math.Log10(docAmount/occ));
+            }
+        }
     }
 }

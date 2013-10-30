@@ -45,7 +45,7 @@ namespace SearchEngine.Solver.Model
             }
         }
 
-        protected virtual void ComputeVectorLength()
+        public virtual void ComputeVectorLength()
         {
             double res = 0;
             foreach (var term in TermFrequency)
