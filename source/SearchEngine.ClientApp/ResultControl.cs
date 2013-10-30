@@ -39,7 +39,7 @@ namespace SearchEngine.ClientApp
 
         private void btShowOrigin_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_document.Title + Environment.NewLine + _document.Content);
+            MessageBox.Show(_document.Content);
         }
 
         private void btStemmed_Click(object sender, EventArgs e)

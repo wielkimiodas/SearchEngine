@@ -28,7 +28,7 @@ namespace SearchEngine.Solver.Model
             var stemmed = stemmer.stemText(paragraph);
             ContentStemmed = stemmed;
 
-            for (var i = 1; i < docLines.Length; i++)
+            for (var i = 0; i < docLines.Length; i++)
             {
                 Content += docLines[i];
             }
@@ -36,6 +36,7 @@ namespace SearchEngine.Solver.Model
 
         public int CompareTo(Document that)
         {
+            if (that == null) return -1;
             if (Similarity == that.Similarity) return 0;
             if (Similarity > that.Similarity) return -1;
             return 1;

@@ -14,8 +14,8 @@ namespace SearchEngine.Solver
 
         public SearchPerformer()
         {
-            keywords = DataReader.LoadKeywords("keywords.txt");
-            documents = DataReader.LoadDocuments("documents.txt");
+            keywords = DataReader.LoadKeywords(@"input\keywords.txt");
+            documents = DataReader.LoadDocuments(@"input\documents.txt");
         }
 
         public List<Document> Search(Query query)
@@ -26,13 +26,15 @@ namespace SearchEngine.Solver
                 document.ApplyIdfComputation(InverseDocumentFrequency);
             }
             query.ApplyIdfComputation(InverseDocumentFrequency);
-            
+
             DocumentValueEstimator.CompareDocumentsToQuery(documents, query);
-            
+
             //top ten
             var list = new List<Document>();
             documents.Sort();
-            for (int i = 0; i < 10; i++)
+            var docAmount = 10;
+            docAmount = Math.Min(docAmount, documents.Count);
+            for (int i = 0; i < docAmount; i++)
                 list.Add(documents[i]);
             return list;
         }
@@ -40,21 +42,28 @@ namespace SearchEngine.Solver
         private void ComputeIdf()
         {
             InverseDocumentFrequency = new Dictionary<string, double>();
-            
+
             var docAmount = documents.Count;
+            var keysStemmed = new List<string>();
             foreach (var key in keywords)
+            {
+                if (!keysStemmed.Contains(key.ValueStemmed))
+                    keysStemmed.Add(key.ValueStemmed);
+            }
+
+            foreach (var key in keysStemmed)
             {
                 var occ = 0;
                 foreach (var doc in documents)
                 {
-                    if (doc.BagOfWords.ContainsKey(key.Value))
+                    if (doc.BagOfWords.ContainsKey(key))
                     {
-                        if (doc.BagOfWords[key.Value] > 0)
+                        if (doc.BagOfWords[key] > 0)
                             occ++;
                     }
                 }
-                var idf = occ == 0 ? 0 : Math.Log10(docAmount / occ);
-                InverseDocumentFrequency.Add(key.Value, idf);
+                var idf = occ == 0 ? 0 : Math.Log10(docAmount / (double)occ);
+                InverseDocumentFrequency.Add(key, idf);
             }
         }
 

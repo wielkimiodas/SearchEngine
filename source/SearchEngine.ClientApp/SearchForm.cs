@@ -15,7 +15,7 @@ namespace SearchEngine.ClientApp
     public partial class SearchForm : Form
     {
         private SearchPerformer searcher;
-        private List<Document> topTenDocuments; 
+        private List<Document> topTenDocuments;
 
         public SearchForm()
         {
@@ -30,9 +30,12 @@ namespace SearchEngine.ClientApp
 
         private void btSearch_Click(object sender, EventArgs e)
         {
-            var query = new Query(tbQuery.Text);
-            topTenDocuments = searcher.Search(query);
-            ReloadDocsView();
+            if (!string.IsNullOrWhiteSpace(tbQuery.Text))
+            {
+                var query = new Query(tbQuery.Text);
+                topTenDocuments = searcher.Search(query);
+                ReloadDocsView();
+            }
         }
 
         private void loadDocumentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -82,8 +85,13 @@ namespace SearchEngine.ClientApp
         private void ReloadDocsView()
         {
             resultsLayoutPanel.Controls.Clear();
-            for(int i=0;i<topTenDocuments.Count;i++)
-                resultsLayoutPanel.Controls.Add(new ResultControl(topTenDocuments[i]));
+            for (int i = 0; i < topTenDocuments.Count; i++)
+            {
+                var doc = topTenDocuments[i];
+                if (doc.Similarity == 0 && i == 0) MessageBox.Show("No documents have been found");
+                if (doc.Similarity > 0)
+                    resultsLayoutPanel.Controls.Add(new ResultControl(doc));
+            }
         }
     }
 }

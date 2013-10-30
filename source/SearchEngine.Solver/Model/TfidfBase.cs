@@ -49,9 +49,9 @@ namespace SearchEngine.Solver.Model
         public virtual void ComputeVectorLength()
         {
             double res = 0;
-            foreach (var term in TermFrequency)
+            foreach (var idfRes in IdfResult)
             {
-                res += Math.Pow(term.Value, 2);
+                res += Math.Pow(idfRes.Value, 2);
             }
             VectorLength = Math.Sqrt(res);
         }

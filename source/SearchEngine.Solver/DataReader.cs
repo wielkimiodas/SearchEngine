@@ -18,7 +18,7 @@ namespace SearchEngine.Solver
             var allText = File.ReadAllText(path);
             //splitting by double new line
             var stringDocs = Regex.Split(allText, @"(?:\r\n){2,}");
-
+            
             var documents = new List<Document>();
 
             foreach (var stringDoc in stringDocs)
