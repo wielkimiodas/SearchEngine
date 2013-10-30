@@ -23,17 +23,7 @@ namespace SearchEngine.ClientApp
 
             foreach (var stringDoc in stringDocs)
             {
-                var docLines = stringDoc.Split(new string[] {Environment.NewLine}, StringSplitOptions.None);
-                var doc = new Document {Title = docLines[0]};
-
-                var stemmer = new PorterStemmer();
-                var stemmed = stemmer.stemText(stringDoc);
-                doc.ContentStemmed = stemmed;
-
-                for(var i=1; i<docLines.Length;i++)
-                {
-                    doc.Content += docLines[i];
-                }
+                var doc = new Document(stringDoc);
                 documents.Add(doc);
             }
             

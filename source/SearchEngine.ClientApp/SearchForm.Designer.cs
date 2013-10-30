@@ -38,9 +38,11 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadKeywordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStripMain = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.resultsGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbQuery
@@ -145,20 +147,28 @@
             this.loadKeywordsToolStripMenuItem.Text = "Load keywords";
             this.loadKeywordsToolStripMenuItem.Click += new System.EventHandler(this.loadKeywordsToolStripMenuItem_Click);
             // 
-            // statusStrip1
+            // statusStripMain
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 375);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(703, 22);
-            this.statusStrip1.TabIndex = 7;
-            this.statusStrip1.Text = "statusStripMain";
+            this.statusStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStripMain.Location = new System.Drawing.Point(0, 375);
+            this.statusStripMain.Name = "statusStripMain";
+            this.statusStripMain.Size = new System.Drawing.Size(703, 22);
+            this.statusStripMain.TabIndex = 7;
+            this.statusStripMain.Text = "statusStripMain";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel1";
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 397);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusStripMain);
             this.Controls.Add(this.resultsGroupBox);
             this.Controls.Add(this.btSearch);
             this.Controls.Add(this.btClose);
@@ -172,6 +182,8 @@
             this.resultsGroupBox.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStripMain.ResumeLayout(false);
+            this.statusStripMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,7 +201,8 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadDocumentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadKeywordsToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip1;        
+        private System.Windows.Forms.StatusStrip statusStripMain;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;        
     }
 }
 

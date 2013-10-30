@@ -34,7 +34,7 @@ namespace SearchEngine.Solver.Stemmer
             return getTerm();
         }
 
-        public HashSet<string> stemText(string s)
+        public List<string> stemText(string s)
         {
             var unentered = s.Replace(Environment.NewLine, " ");
             //eliminates everything which is not a word or space
@@ -47,11 +47,11 @@ namespace SearchEngine.Solver.Stemmer
             {
                 wordsArray[i] = stemTerm(wordsArray[i]);
             }
-            //removes duplicates
-            var hashSet = new HashSet<string>(wordsArray);
-            //removes empty element
-            hashSet.RemoveWhere(string.IsNullOrEmpty);
-            return hashSet;
+            
+            var list = new List<string>(wordsArray);
+            //removes empty elements
+            list.RemoveAll(string.IsNullOrWhiteSpace);
+            return list;
         }
 
         /*

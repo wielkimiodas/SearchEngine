@@ -8,5 +8,6 @@ namespace SearchEngine.Solver
 {
     public class MathUtils
     {
+        
     }
 }
