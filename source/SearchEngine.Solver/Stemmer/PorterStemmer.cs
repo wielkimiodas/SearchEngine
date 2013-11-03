@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SearchEngine.Solver.Stemmer
 {
@@ -13,9 +9,14 @@ namespace SearchEngine.Solver.Stemmer
     public class PorterStemmer : StemmerInterface
     {
         private char[] b;
-        private int i,     /* offset into b */
-            i_end, /* offset to end of stemmed word */
-            j, k;
+
+        private int i,
+            /* offset into b */
+            i_end,
+            /* offset to end of stemmed word */
+            j,
+            k;
+
         private static int INC = 200;
         /* unit of size whereby b is increased */
 
@@ -27,6 +28,7 @@ namespace SearchEngine.Solver.Stemmer
         }
 
         /* Implementation of the .NET interface - added as part of realease 4 (Leif) */
+
         public string stemTerm(string s)
         {
             setTerm(s);
@@ -47,7 +49,7 @@ namespace SearchEngine.Solver.Stemmer
             {
                 wordsArray[i] = stemTerm(wordsArray[i]);
             }
-            
+
             var list = new List<string>(wordsArray);
             //removes empty elements
             list.RemoveAll(string.IsNullOrWhiteSpace);
@@ -66,8 +68,7 @@ namespace SearchEngine.Solver.Stemmer
         */
 
 
-
-        void setTerm(string s)
+        private void setTerm(string s)
         {
             i = s.Length;
             char[] new_b = new char[i];
@@ -75,7 +76,6 @@ namespace SearchEngine.Solver.Stemmer
                 new_b[c] = s[c];
 
             b = new_b;
-
         }
 
         public string getTerm()
@@ -128,6 +128,7 @@ namespace SearchEngine.Solver.Stemmer
          * or a reference to the internal buffer can be retrieved by getResultBuffer
          * and getResultLength (which is generally more efficient.)
          */
+
         public override string ToString()
         {
             return new String(b, 0, i_end);
@@ -136,6 +137,7 @@ namespace SearchEngine.Solver.Stemmer
         /**
          * Returns the length of the word resulting from the stemming process.
          */
+
         public int getResultLength()
         {
             return i_end;
@@ -146,12 +148,16 @@ namespace SearchEngine.Solver.Stemmer
          * the stemming process.  You also need to consult getResultLength()
          * to determine the length of the result.
          */
+
         public char[] getResultBuffer()
         {
             return b;
         }
+
         #region private
+
         /* cons(i) is true <=> b[i] is a consonant. */
+
         private bool cons(int i)
         {
             switch (b[i])
@@ -160,9 +166,12 @@ namespace SearchEngine.Solver.Stemmer
                 case 'e':
                 case 'i':
                 case 'o':
-                case 'u': return false;
-                case 'y': return (i == 0) ? true : !cons(i - 1);
-                default: return true;
+                case 'u':
+                    return false;
+                case 'y':
+                    return (i == 0) ? true : !cons(i - 1);
+                default:
+                    return true;
             }
         }
 
@@ -176,6 +185,7 @@ namespace SearchEngine.Solver.Stemmer
               <c>vcvcvc<v> gives 3
               ....
         */
+
         private int m()
         {
             int n = 0;
@@ -183,7 +193,8 @@ namespace SearchEngine.Solver.Stemmer
             while (true)
             {
                 if (i > j) return n;
-                if (!cons(i)) break; i++;
+                if (!cons(i)) break;
+                i++;
             }
             i++;
             while (true)
@@ -207,6 +218,7 @@ namespace SearchEngine.Solver.Stemmer
         }
 
         /* vowelinstem() is true <=> 0,...j contains a vowel */
+
         private bool vowelinstem()
         {
             int i;
@@ -217,6 +229,7 @@ namespace SearchEngine.Solver.Stemmer
         }
 
         /* doublec(j) is true <=> j,(j-1) contain a double consonant. */
+
         private bool doublec(int j)
         {
             if (j < 1)
@@ -234,6 +247,7 @@ namespace SearchEngine.Solver.Stemmer
               snow, box, tray.
 
         */
+
         private bool cvc(int i)
         {
             if (i < 2 || !cons(i) || cons(i - 1) || !cons(i - 2))
@@ -260,6 +274,7 @@ namespace SearchEngine.Solver.Stemmer
 
         /* setto(s) sets (j+1),...k to the characters in the string s, readjusting
            k. */
+
         private void setto(String s)
         {
             int l = s.Length;
@@ -271,6 +286,7 @@ namespace SearchEngine.Solver.Stemmer
         }
 
         /* r(s) is used further down. */
+
         private void r(String s)
         {
             if (m() > 0)
@@ -335,6 +351,7 @@ namespace SearchEngine.Solver.Stemmer
         }
 
         /* step2() turns terminal y to i when there is another vowel in the stem. */
+
         private void step2()
         {
             if (ends("y") && vowelinstem())
@@ -344,6 +361,7 @@ namespace SearchEngine.Solver.Stemmer
         /* step3() maps double suffices to single ones. so -ization ( = -ize plus
            -ation) maps to -ize etc. note that the string before the suffix must give
            m() > 0. */
+
         private void step3()
         {
             if (k == 0)
@@ -353,41 +371,125 @@ namespace SearchEngine.Solver.Stemmer
             switch (b[k - 1])
             {
                 case 'a':
-                    if (ends("ational")) { r("ate"); break; }
-                    if (ends("tional")) { r("tion"); break; }
+                    if (ends("ational"))
+                    {
+                        r("ate");
+                        break;
+                    }
+                    if (ends("tional"))
+                    {
+                        r("tion");
+                        break;
+                    }
                     break;
                 case 'c':
-                    if (ends("enci")) { r("ence"); break; }
-                    if (ends("anci")) { r("ance"); break; }
+                    if (ends("enci"))
+                    {
+                        r("ence");
+                        break;
+                    }
+                    if (ends("anci"))
+                    {
+                        r("ance");
+                        break;
+                    }
                     break;
                 case 'e':
-                    if (ends("izer")) { r("ize"); break; }
+                    if (ends("izer"))
+                    {
+                        r("ize");
+                        break;
+                    }
                     break;
                 case 'l':
-                    if (ends("bli")) { r("ble"); break; }
-                    if (ends("alli")) { r("al"); break; }
-                    if (ends("entli")) { r("ent"); break; }
-                    if (ends("eli")) { r("e"); break; }
-                    if (ends("ousli")) { r("ous"); break; }
+                    if (ends("bli"))
+                    {
+                        r("ble");
+                        break;
+                    }
+                    if (ends("alli"))
+                    {
+                        r("al");
+                        break;
+                    }
+                    if (ends("entli"))
+                    {
+                        r("ent");
+                        break;
+                    }
+                    if (ends("eli"))
+                    {
+                        r("e");
+                        break;
+                    }
+                    if (ends("ousli"))
+                    {
+                        r("ous");
+                        break;
+                    }
                     break;
                 case 'o':
-                    if (ends("ization")) { r("ize"); break; }
-                    if (ends("ation")) { r("ate"); break; }
-                    if (ends("ator")) { r("ate"); break; }
+                    if (ends("ization"))
+                    {
+                        r("ize");
+                        break;
+                    }
+                    if (ends("ation"))
+                    {
+                        r("ate");
+                        break;
+                    }
+                    if (ends("ator"))
+                    {
+                        r("ate");
+                        break;
+                    }
                     break;
                 case 's':
-                    if (ends("alism")) { r("al"); break; }
-                    if (ends("iveness")) { r("ive"); break; }
-                    if (ends("fulness")) { r("ful"); break; }
-                    if (ends("ousness")) { r("ous"); break; }
+                    if (ends("alism"))
+                    {
+                        r("al");
+                        break;
+                    }
+                    if (ends("iveness"))
+                    {
+                        r("ive");
+                        break;
+                    }
+                    if (ends("fulness"))
+                    {
+                        r("ful");
+                        break;
+                    }
+                    if (ends("ousness"))
+                    {
+                        r("ous");
+                        break;
+                    }
                     break;
                 case 't':
-                    if (ends("aliti")) { r("al"); break; }
-                    if (ends("iviti")) { r("ive"); break; }
-                    if (ends("biliti")) { r("ble"); break; }
+                    if (ends("aliti"))
+                    {
+                        r("al");
+                        break;
+                    }
+                    if (ends("iviti"))
+                    {
+                        r("ive");
+                        break;
+                    }
+                    if (ends("biliti"))
+                    {
+                        r("ble");
+                        break;
+                    }
                     break;
                 case 'g':
-                    if (ends("logi")) { r("log"); break; }
+                    if (ends("logi"))
+                    {
+                        r("log");
+                        break;
+                    }
                     break;
                 default:
                     break;
@@ -395,29 +497,59 @@ namespace SearchEngine.Solver.Stemmer
         }
 
         /* step4() deals with -ic-, -full, -ness etc. similar strategy to step3. */
+
         private void step4()
         {
             switch (b[k])
             {
                 case 'e':
-                    if (ends("icate")) { r("ic"); break; }
-                    if (ends("ative")) { r(""); break; }
-                    if (ends("alize")) { r("al"); break; }
+                    if (ends("icate"))
+                    {
+                        r("ic");
+                        break;
+                    }
+                    if (ends("ative"))
+                    {
+                        r("");
+                        break;
+                    }
+                    if (ends("alize"))
+                    {
+                        r("al");
+                        break;
+                    }
                     break;
                 case 'i':
-                    if (ends("iciti")) { r("ic"); break; }
+                    if (ends("iciti"))
+                    {
+                        r("ic");
+                        break;
+                    }
                     break;
                 case 'l':
-                    if (ends("ical")) { r("ic"); break; }
-                    if (ends("ful")) { r(""); break; }
+                    if (ends("ical"))
+                    {
+                        r("ic");
+                        break;
+                    }
+                    if (ends("ful"))
+                    {
+                        r("");
+                        break;
+                    }
                     break;
                 case 's':
-                    if (ends("ness")) { r(""); break; }
+                    if (ends("ness"))
+                    {
+                        r("");
+                        break;
+                    }
                     break;
             }
         }
 
         /* step5() takes off -ant, -ence etc., in context <c>vcvc<v>. */
+
         private void step5()
         {
             if (k == 0)
@@ -427,39 +559,51 @@ namespace SearchEngine.Solver.Stemmer
             switch (b[k - 1])
             {
                 case 'a':
-                    if (ends("al")) break; return;
+                    if (ends("al")) break;
+                    return;
                 case 'c':
                     if (ends("ance")) break;
-                    if (ends("ence")) break; return;
+                    if (ends("ence")) break;
+                    return;
                 case 'e':
-                    if (ends("er")) break; return;
+                    if (ends("er")) break;
+                    return;
                 case 'i':
-                    if (ends("ic")) break; return;
+                    if (ends("ic")) break;
+                    return;
                 case 'l':
                     if (ends("able")) break;
-                    if (ends("ible")) break; return;
+                    if (ends("ible")) break;
+                    return;
                 case 'n':
                     if (ends("ant")) break;
                     if (ends("ement")) break;
                     if (ends("ment")) break;
                     /* element etc. not stripped before the m */
-                    if (ends("ent")) break; return;
+                    if (ends("ent")) break;
+                    return;
                 case 'o':
                     if (ends("ion") && j >= 0 && (b[j] == 's' || b[j] == 't')) break;
                     /* j >= 0 fixes Bug 2 */
-                    if (ends("ou")) break; return;
-                /* takes care of -ous */
+                    if (ends("ou")) break;
+                    return;
+                    /* takes care of -ous */
                 case 's':
-                    if (ends("ism")) break; return;
+                    if (ends("ism")) break;
+                    return;
                 case 't':
                     if (ends("ate")) break;
-                    if (ends("iti")) break; return;
+                    if (ends("iti")) break;
+                    return;
                 case 'u':
-                    if (ends("ous")) break; return;
+                    if (ends("ous")) break;
+                    return;
                 case 'v':
-                    if (ends("ive")) break; return;
+                    if (ends("ive")) break;
+                    return;
                 case 'z':
-                    if (ends("ize")) break; return;
+                    if (ends("ize")) break;
+                    return;
                 default:
                     return;
             }
@@ -468,6 +612,7 @@ namespace SearchEngine.Solver.Stemmer
         }
 
         /* step6() removes a final -e if m() > 1. */
+
         private void step6()
         {
             j = k;
@@ -505,7 +650,5 @@ namespace SearchEngine.Solver.Stemmer
             i_end = k + 1;
             i = 0;
         }
-
-
     }
 }

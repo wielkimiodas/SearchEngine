@@ -41,13 +41,11 @@
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.flowLayoutPanelProposes = new System.Windows.Forms.FlowLayoutPanel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBoxSuggestions = new System.Windows.Forms.GroupBox();
             this.cbSuggestions = new System.Windows.Forms.CheckBox();
             this.resultsGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStripMain.SuspendLayout();
-            this.flowLayoutPanelProposes.SuspendLayout();
             this.groupBoxSuggestions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,22 +169,11 @@
             // 
             // flowLayoutPanelProposes
             // 
-            this.flowLayoutPanelProposes.Controls.Add(this.linkLabel1);
             this.flowLayoutPanelProposes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelProposes.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelProposes.Name = "flowLayoutPanelProposes";
             this.flowLayoutPanelProposes.Size = new System.Drawing.Size(589, 14);
             this.flowLayoutPanelProposes.TabIndex = 8;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(3, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
             // 
             // groupBoxSuggestions
             // 
@@ -234,8 +221,6 @@
             this.menuStrip1.PerformLayout();
             this.statusStripMain.ResumeLayout(false);
             this.statusStripMain.PerformLayout();
-            this.flowLayoutPanelProposes.ResumeLayout(false);
-            this.flowLayoutPanelProposes.PerformLayout();
             this.groupBoxSuggestions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -257,7 +242,6 @@
         private System.Windows.Forms.StatusStrip statusStripMain;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProposes;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.GroupBox groupBoxSuggestions;
         private System.Windows.Forms.CheckBox cbSuggestions;        
     }

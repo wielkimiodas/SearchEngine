@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SearchEngine.Solver.Stemmer;
 
 namespace SearchEngine.Solver.Model
 {
@@ -24,7 +19,5 @@ namespace SearchEngine.Solver.Model
             if (Similarity > that.Similarity) return -1;
             return 1;
         }
-
-        
     }
 }

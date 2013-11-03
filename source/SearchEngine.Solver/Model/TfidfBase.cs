@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SearchEngine.Solver.Stemmer;
 
 namespace SearchEngine.Solver.Model
@@ -10,7 +9,7 @@ namespace SearchEngine.Solver.Model
     {
         public List<string> ContentStemmed { get; set; }
         public string OriginalContent { get; set; }
-        
+
         public virtual Dictionary<string, int> BagOfWords { get; set; }
         public virtual Dictionary<string, double> TermFrequency { get; set; }
         public virtual double VectorLength { get; set; }
@@ -47,7 +46,7 @@ namespace SearchEngine.Solver.Model
             TermFrequency = new Dictionary<string, double>();
             foreach (var word in BagOfWords)
             {
-                TermFrequency.Add(word.Key, word.Value / max);
+                TermFrequency.Add(word.Key, word.Value/max);
             }
         }
 
@@ -67,10 +66,9 @@ namespace SearchEngine.Solver.Model
             foreach (var record in TermFrequency)
             {
                 if (idf.ContainsKey(record.Key))
-                    IdfResult.Add(record.Key, record.Value * idf[record.Key]);
+                    IdfResult.Add(record.Key, record.Value*idf[record.Key]);
             }
             ComputeVectorLength();
         }
-
     }
 }

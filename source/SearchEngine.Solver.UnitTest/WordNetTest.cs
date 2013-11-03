@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using LAIR.Collections.Generic;
 using LAIR.ResourceAPIs.WordNet;
@@ -18,7 +15,7 @@ namespace SearchEngine.Solver.UnitTest
         public void TestMethod1()
         {
             string a = Environment.CurrentDirectory;
-            string b = a.Substring(0,a.IndexOf("source"));
+            string b = a.Substring(0, a.IndexOf("source"));
             string c = Path.Combine(b, @"contrib\WordNet 3.0\dict");
             WordNetEngine wordNetEngine = new WordNetEngine(c, false);
             string txt = "availability";
@@ -26,7 +23,7 @@ namespace SearchEngine.Solver.UnitTest
             synSetsToShow.AddRange(wordNetEngine.GetSynSets(txt, WordNetEngine.POS.Adverb));
             synSetsToShow.AddRange(wordNetEngine.GetSynSets(txt, WordNetEngine.POS.Noun));
             synSetsToShow.AddRange(wordNetEngine.GetSynSets(txt, WordNetEngine.POS.Verb));
-            
+
             List<string> synonyms = new List<string>();
             foreach (SynSet synSet in synSetsToShow)
             {
@@ -43,7 +40,7 @@ namespace SearchEngine.Solver.UnitTest
             {
                 res += synonym + " ";
             }
-            MessageBox.Show("Synonyms: "+ res);
+            MessageBox.Show("Synonyms: " + res);
         }
     }
 }

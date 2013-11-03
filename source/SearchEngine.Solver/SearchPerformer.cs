@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using LAIR.Collections.Generic;
 using LAIR.ResourceAPIs.WordNet;
 using SearchEngine.Solver.Model;
@@ -18,8 +16,8 @@ namespace SearchEngine.Solver
 
         public SearchPerformer()
         {
-            keywords = DataReader.LoadKeywords(@"input\keywords-lab1.txt");
-            documents = DataReader.LoadDocuments(@"input\documents-lab1.txt");
+            keywords = DataReader.LoadKeywords(@"input\keywords.txt");
+            documents = DataReader.LoadDocuments(@"input\documents.txt");
             InitWordNetEngine();
         }
 
@@ -75,7 +73,7 @@ namespace SearchEngine.Solver
                             occ++;
                     }
                 }
-                var idf = occ == 0 ? 0 : Math.Log10(docAmount / (double)occ);
+                var idf = occ == 0 ? 0 : Math.Log10(docAmount/(double) occ);
                 InverseDocumentFrequency.Add(key, idf);
             }
         }
@@ -95,11 +93,11 @@ namespace SearchEngine.Solver
         public List<string> ProposeSimilarQueries(string originalQuery)
         {
             var synSetSynonyms = new Set<SynSet>();
-            foreach (WordNetEngine.POS wordType in Enum.GetValues(typeof(WordNetEngine.POS)))
+            foreach (WordNetEngine.POS wordType in Enum.GetValues(typeof (WordNetEngine.POS)))
             {
                 if (wordType != WordNetEngine.POS.None)
                 {
-                    synSetSynonyms.AddRange(wordNetEngine.GetSynSets(originalQuery,wordType));
+                    synSetSynonyms.AddRange(wordNetEngine.GetSynSets(originalQuery, wordType));
                 }
             }
 
@@ -118,6 +116,5 @@ namespace SearchEngine.Solver
             synonyms.Remove(originalQuery.ToLowerInvariant());
             return synonyms;
         }
-
     }
 }

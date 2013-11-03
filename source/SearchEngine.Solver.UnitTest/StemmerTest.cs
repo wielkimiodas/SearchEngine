@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SearchEngine.Solver.Stemmer;
@@ -27,7 +26,7 @@ namespace SearchEngine.Solver.UnitTest
             watch.Start();
             stemmer.stemText(text);
             watch.Stop();
-            Debug.WriteLine("Elapsed ms: "+watch.ElapsedMilliseconds);
+            Debug.WriteLine("Elapsed ms: " + watch.ElapsedMilliseconds);
         }
     }
 }

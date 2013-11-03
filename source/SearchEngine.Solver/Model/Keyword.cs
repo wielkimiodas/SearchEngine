@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SearchEngine.Solver.Model
+﻿namespace SearchEngine.Solver.Model
 {
     public class Keyword
     {

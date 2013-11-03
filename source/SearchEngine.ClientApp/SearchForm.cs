@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using SearchEngine.Solver;
 using SearchEngine.Solver.Model;
@@ -25,9 +21,10 @@ namespace SearchEngine.ClientApp
             searcher = new SearchPerformer();
             tbQuery.KeyDown += tbQuery_KeyDown;
             cbSuggestions.Checked = true;
+            toolStripStatusLabel.Text = "";
         }
 
-        void tbQuery_KeyDown(object sender, KeyEventArgs e)
+        private void tbQuery_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Return)
             {
@@ -98,20 +95,22 @@ namespace SearchEngine.ClientApp
                 if (doc.Similarity == 0 && i == 0)
                 {
                     resultsLayoutPanel.Controls.Add(
-                        new Label() { Text = "No documents have been found", AutoSize = true, Margin = new Padding(10) });
-                    toolStripStatusLabel.Text = "There is no document in database which has positive similarity to given query.";
+                        new Label() {Text = "No documents have been found", AutoSize = true, Margin = new Padding(10)});
+                    toolStripStatusLabel.Text =
+                        "There is no document in database which has positive similarity to given query.";
                 }
                 if (doc.Similarity > 0)
                 {
                     resultsLayoutPanel.Controls.Add(new ResultControl(doc));
-                    toolStripStatusLabel.Text = "Founded: " + topTenDocuments.Count + " documents in " + stopwatch.ElapsedMilliseconds + " miliseconds.";
+                    toolStripStatusLabel.Text = "Founded: " + topTenDocuments.Count + " documents in " +
+                                                stopwatch.ElapsedMilliseconds + " miliseconds.";
                 }
             }
         }
 
         private void Query_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var link = (LinkLabel)sender;
+            var link = (LinkLabel) sender;
             Search(link.Text);
             tbQuery.Text = link.Text;
         }
@@ -138,13 +137,13 @@ namespace SearchEngine.ClientApp
             {
                 if (props.Count < 1)
                 {
-                    flowLayoutPanelProposes.Controls.Add(new Label() { Text = "No suggestions proposed" });
+                    flowLayoutPanelProposes.Controls.Add(new Label() {Text = "No suggestions proposed"});
                 }
                 else
                 {
                     foreach (var prop in props)
                     {
-                        var linkLabel = new LinkLabel() { Text = prop };
+                        var linkLabel = new LinkLabel() {Text = prop};
                         linkLabel.LinkClicked += Query_LinkClicked;
                         flowLayoutPanelProposes.Controls.Add(linkLabel);
                     }
