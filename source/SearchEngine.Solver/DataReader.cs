@@ -35,7 +35,7 @@ namespace SearchEngine.Solver
             if (path == null) throw new ArgumentNullException("path");
 
             var allText = File.ReadAllText(path);
-            var keywordsArray = allText.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            var keywordsArray = allText.Split(new [] { Environment.NewLine }, StringSplitOptions.None);
             var keywords = new List<Keyword>();
 
             var stemmer = new PorterStemmer();

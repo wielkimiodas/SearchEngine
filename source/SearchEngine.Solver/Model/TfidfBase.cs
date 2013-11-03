@@ -2,18 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SearchEngine.Solver.Stemmer;
 
 namespace SearchEngine.Solver.Model
 {
     public abstract class TfidfBase
     {
+        public List<string> ContentStemmed { get; set; }
+        public string OriginalContent { get; set; }
+        
         public virtual Dictionary<string, int> BagOfWords { get; set; }
-        public virtual List<string> ContentStemmed { get; set; }
         public virtual Dictionary<string, double> TermFrequency { get; set; }
         public virtual double VectorLength { get; set; }
         public virtual Dictionary<string, double> IdfResult { get; set; }
 
-        protected virtual void CountOccurances()
+        protected TfidfBase(string text)
+        {
+            OriginalContent = text;
+            var stemmer = new PorterStemmer();
+            ContentStemmed = stemmer.stemText(text);
+            CountOccurances();
+            ComputeTermFreq();
+        }
+
+        private void CountOccurances()
         {
             BagOfWords = new Dictionary<string, int>();
             foreach (var word in ContentStemmed)
@@ -29,14 +41,7 @@ namespace SearchEngine.Solver.Model
             }
         }
 
-        protected virtual void OverallComputation()
-        {
-            CountOccurances();
-            ComputeTermFreq();
-            //ComputeVectorLength();
-        }
-
-        protected virtual void ComputeTermFreq()
+        protected void ComputeTermFreq()
         {
             double max = BagOfWords.Values.Max();
             TermFrequency = new Dictionary<string, double>();

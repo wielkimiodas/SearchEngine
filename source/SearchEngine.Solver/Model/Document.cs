@@ -10,28 +10,11 @@ namespace SearchEngine.Solver.Model
     public sealed class Document : TfidfBase, IComparable<Document>
     {
         public string Title { get; set; }
-        public string Content { get; set; }
         public double Similarity { get; set; }
 
-        public Document(string paragraph)
+        public Document(string paragraph) : base(paragraph)
         {
-            ProcessGivenText(paragraph);
-            OverallComputation();
-        }
-
-        private void ProcessGivenText(string paragraph)
-        {
-            var docLines = paragraph.Split(new [] { Environment.NewLine }, StringSplitOptions.None);
-            Title = docLines[0];
-
-            var stemmer = new PorterStemmer();
-            var stemmed = stemmer.stemText(paragraph);
-            ContentStemmed = stemmed;
-
-            for (var i = 0; i < docLines.Length; i++)
-            {
-                Content += docLines[i];
-            }
+            Title = paragraph.Substring(0, paragraph.IndexOf('\n'));
         }
 
         public int CompareTo(Document that)

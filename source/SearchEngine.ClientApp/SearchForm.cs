@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,12 +17,14 @@ namespace SearchEngine.ClientApp
     {
         private SearchPerformer searcher;
         private List<Document> topTenDocuments;
+        private Stopwatch stopwatch = new Stopwatch();
 
         public SearchForm()
         {
             InitializeComponent();
             searcher = new SearchPerformer();
             tbQuery.KeyDown += tbQuery_KeyDown;
+            cbSuggestions.Checked = true;
         }
 
         void tbQuery_KeyDown(object sender, KeyEventArgs e)
@@ -39,12 +42,7 @@ namespace SearchEngine.ClientApp
 
         private void btSearch_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(tbQuery.Text))
-            {
-                var query = new Query(tbQuery.Text);
-                topTenDocuments = searcher.Search(query);
-                ReloadDocsView();
-            }
+            Search(tbQuery.Text);
         }
 
         private void loadDocumentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -97,9 +95,60 @@ namespace SearchEngine.ClientApp
             for (int i = 0; i < topTenDocuments.Count; i++)
             {
                 var doc = topTenDocuments[i];
-                if (doc.Similarity == 0 && i == 0) MessageBox.Show("No documents have been found");
+                if (doc.Similarity == 0 && i == 0)
+                {
+                    resultsLayoutPanel.Controls.Add(
+                        new Label() { Text = "No documents have been found", AutoSize = true, Margin = new Padding(10) });
+                    toolStripStatusLabel.Text = "There is no document in database which has positive similarity to given query.";
+                }
                 if (doc.Similarity > 0)
+                {
                     resultsLayoutPanel.Controls.Add(new ResultControl(doc));
+                    toolStripStatusLabel.Text = "Founded: " + topTenDocuments.Count + " documents in " + stopwatch.ElapsedMilliseconds + " miliseconds.";
+                }
+            }
+        }
+
+        private void Query_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var link = (LinkLabel)sender;
+            Search(link.Text);
+            tbQuery.Text = link.Text;
+        }
+
+        private void Search(string originalQuery)
+        {
+            if (!string.IsNullOrWhiteSpace(originalQuery))
+            {
+                stopwatch.Restart();
+                var query = new Query(originalQuery);
+                topTenDocuments = searcher.Search(query);
+                ReloadDocsView();
+                ApplyQuerySuggestions(query.OriginalContent);
+                stopwatch.Stop();
+            }
+        }
+
+        private void ApplyQuerySuggestions(string originalQuery)
+        {
+            var props = searcher.ProposeSimilarQueries(originalQuery).Take(5).ToList();
+            flowLayoutPanelProposes.Controls.Clear();
+
+            if (cbSuggestions.Checked)
+            {
+                if (props.Count < 1)
+                {
+                    flowLayoutPanelProposes.Controls.Add(new Label() { Text = "No suggestions proposed" });
+                }
+                else
+                {
+                    foreach (var prop in props)
+                    {
+                        var linkLabel = new LinkLabel() { Text = prop };
+                        linkLabel.LinkClicked += Query_LinkClicked;
+                        flowLayoutPanelProposes.Controls.Add(linkLabel);
+                    }
+                }
             }
         }
     }

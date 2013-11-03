@@ -9,16 +9,8 @@ namespace SearchEngine.Solver.Model
     public sealed class Query : TfidfBase
     {
         public Query(string query)
+            : base(query)
         {
-            ProcessGivenText(query);
-            OverallComputation();
-            
-        }
-
-        private void ProcessGivenText(string text)
-        {
-            var stemmer = new PorterStemmer();
-            ContentStemmed = stemmer.stemText(text);
         }
     }
 }

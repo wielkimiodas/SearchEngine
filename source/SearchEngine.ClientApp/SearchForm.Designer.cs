@@ -40,9 +40,15 @@
             this.loadKeywordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.flowLayoutPanelProposes = new System.Windows.Forms.FlowLayoutPanel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.groupBoxSuggestions = new System.Windows.Forms.GroupBox();
+            this.cbSuggestions = new System.Windows.Forms.CheckBox();
             this.resultsGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStripMain.SuspendLayout();
+            this.flowLayoutPanelProposes.SuspendLayout();
+            this.groupBoxSuggestions.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbQuery
@@ -66,7 +72,7 @@
             // btClose
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClose.Location = new System.Drawing.Point(613, 349);
+            this.btClose.Location = new System.Drawing.Point(619, 349);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(75, 23);
             this.btClose.TabIndex = 2;
@@ -77,7 +83,7 @@
             // btSearch
             // 
             this.btSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSearch.Location = new System.Drawing.Point(616, 27);
+            this.btSearch.Location = new System.Drawing.Point(619, 28);
             this.btSearch.Name = "btSearch";
             this.btSearch.Size = new System.Drawing.Size(75, 23);
             this.btSearch.TabIndex = 3;
@@ -91,9 +97,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.resultsGroupBox.Controls.Add(this.resultsLayoutPanel);
-            this.resultsGroupBox.Location = new System.Drawing.Point(12, 56);
+            this.resultsGroupBox.Location = new System.Drawing.Point(12, 95);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(679, 287);
+            this.resultsGroupBox.Size = new System.Drawing.Size(679, 248);
             this.resultsGroupBox.TabIndex = 5;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results:";
@@ -111,7 +117,7 @@
             this.resultsLayoutPanel.Name = "resultsLayoutPanel";
             this.resultsLayoutPanel.RowCount = 1;
             this.resultsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.resultsLayoutPanel.Size = new System.Drawing.Size(673, 268);
+            this.resultsLayoutPanel.Size = new System.Drawing.Size(673, 229);
             this.resultsLayoutPanel.TabIndex = 0;
             // 
             // menuStrip1
@@ -163,11 +169,55 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel1";
             // 
+            // flowLayoutPanelProposes
+            // 
+            this.flowLayoutPanelProposes.Controls.Add(this.linkLabel1);
+            this.flowLayoutPanelProposes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelProposes.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelProposes.Name = "flowLayoutPanelProposes";
+            this.flowLayoutPanelProposes.Size = new System.Drawing.Size(589, 14);
+            this.flowLayoutPanelProposes.TabIndex = 8;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(3, 0);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel1.TabIndex = 0;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "linkLabel1";
+            // 
+            // groupBoxSuggestions
+            // 
+            this.groupBoxSuggestions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxSuggestions.Controls.Add(this.flowLayoutPanelProposes);
+            this.groupBoxSuggestions.Location = new System.Drawing.Point(15, 56);
+            this.groupBoxSuggestions.Name = "groupBoxSuggestions";
+            this.groupBoxSuggestions.Size = new System.Drawing.Size(595, 33);
+            this.groupBoxSuggestions.TabIndex = 8;
+            this.groupBoxSuggestions.TabStop = false;
+            this.groupBoxSuggestions.Text = "Suggestions";
+            // 
+            // cbSuggestions
+            // 
+            this.cbSuggestions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSuggestions.AutoSize = true;
+            this.cbSuggestions.Location = new System.Drawing.Point(619, 68);
+            this.cbSuggestions.Name = "cbSuggestions";
+            this.cbSuggestions.Size = new System.Drawing.Size(55, 17);
+            this.cbSuggestions.TabIndex = 9;
+            this.cbSuggestions.Text = "on/off";
+            this.cbSuggestions.UseVisualStyleBackColor = true;
+            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 397);
+            this.Controls.Add(this.cbSuggestions);
+            this.Controls.Add(this.groupBoxSuggestions);
             this.Controls.Add(this.statusStripMain);
             this.Controls.Add(this.resultsGroupBox);
             this.Controls.Add(this.btSearch);
@@ -184,6 +234,9 @@
             this.menuStrip1.PerformLayout();
             this.statusStripMain.ResumeLayout(false);
             this.statusStripMain.PerformLayout();
+            this.flowLayoutPanelProposes.ResumeLayout(false);
+            this.flowLayoutPanelProposes.PerformLayout();
+            this.groupBoxSuggestions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,7 +255,11 @@
         private System.Windows.Forms.ToolStripMenuItem loadDocumentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadKeywordsToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStripMain;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;        
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProposes;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.GroupBox groupBoxSuggestions;
+        private System.Windows.Forms.CheckBox cbSuggestions;        
     }
 }
 
