@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -145,6 +146,7 @@ namespace SearchEngine.ClientApp
                     {
                         var linkLabel = new LinkLabel() {Text = prop};
                         linkLabel.LinkClicked += Query_LinkClicked;
+                        linkLabel.MinimumSize = TextRenderer.MeasureText(prop, linkLabel.Font);
                         flowLayoutPanelProposes.Controls.Add(linkLabel);
                     }
                 }

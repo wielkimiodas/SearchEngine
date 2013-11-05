@@ -76,7 +76,7 @@ namespace SearchEngine.Solver
                             occ++;
                     }
                 }
-                var idf = occ == 0 ? 0 : Math.Log10(docAmount/(double) occ);
+                var idf = occ == 0 ? 0 : Math.Log10(docAmount / (double)occ);
                 InverseDocumentFrequency.Add(key, idf);
             }
         }
@@ -96,7 +96,7 @@ namespace SearchEngine.Solver
         public List<string> ProposeSimilarQueries(string originalQuery)
         {
             var synSetSynonyms = new Set<SynSet>();
-            foreach (WordNetEngine.POS wordType in Enum.GetValues(typeof (WordNetEngine.POS)))
+            foreach (WordNetEngine.POS wordType in Enum.GetValues(typeof(WordNetEngine.POS)))
             {
                 if (wordType != WordNetEngine.POS.None)
                 {
@@ -123,7 +123,7 @@ namespace SearchEngine.Solver
 
             foreach (var synonym in synonyms)
             {
-                var list = synonym.Split(new[] {'_'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+                var list = synonym.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 var stemmedList = list.Select(stemmer.stemTerm).ToList();
 
                 stemmedSynonyms.Add(
@@ -133,19 +133,16 @@ namespace SearchEngine.Solver
                         ValueStemmedList = stemmedList
                     });
             }
-            
-            //remove suggestions which does not fit the keywords
 
             foreach (var stemmedSynonym in stemmedSynonyms.ToList())
             {
-                if (!stemmedSynonym.ValueStemmedList.All(x => keywords.Exists(y=>y.ValueStemmed==x)))
+                if (!stemmedSynonym.ValueStemmedList.All(x => keywords.Exists(y => y.ValueStemmed == x)))
                 {
                     stemmedSynonyms.Remove(stemmedSynonym);
                 }
             }
 
-            var res = stemmedSynonyms.Select(x=>string.Join(" ",x.ValueList)).ToList();
-                //x => String.Join(" ", x)).ToString();
+            var res = stemmedSynonyms.Select(x => string.Join(" ", x.ValueList)).ToList();
 
             return res;
         }

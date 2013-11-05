@@ -55,7 +55,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbQuery.Location = new System.Drawing.Point(106, 30);
             this.tbQuery.Name = "tbQuery";
-            this.tbQuery.Size = new System.Drawing.Size(504, 20);
+            this.tbQuery.Size = new System.Drawing.Size(576, 20);
             this.tbQuery.TabIndex = 0;
             // 
             // label1
@@ -70,7 +70,7 @@
             // btClose
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClose.Location = new System.Drawing.Point(619, 349);
+            this.btClose.Location = new System.Drawing.Point(691, 417);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(75, 23);
             this.btClose.TabIndex = 2;
@@ -81,7 +81,7 @@
             // btSearch
             // 
             this.btSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSearch.Location = new System.Drawing.Point(619, 28);
+            this.btSearch.Location = new System.Drawing.Point(691, 28);
             this.btSearch.Name = "btSearch";
             this.btSearch.Size = new System.Drawing.Size(75, 23);
             this.btSearch.TabIndex = 3;
@@ -95,9 +95,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.resultsGroupBox.Controls.Add(this.resultsLayoutPanel);
-            this.resultsGroupBox.Location = new System.Drawing.Point(12, 95);
+            this.resultsGroupBox.Location = new System.Drawing.Point(12, 103);
             this.resultsGroupBox.Name = "resultsGroupBox";
-            this.resultsGroupBox.Size = new System.Drawing.Size(679, 248);
+            this.resultsGroupBox.Size = new System.Drawing.Size(751, 308);
             this.resultsGroupBox.TabIndex = 5;
             this.resultsGroupBox.TabStop = false;
             this.resultsGroupBox.Text = "Results:";
@@ -115,7 +115,7 @@
             this.resultsLayoutPanel.Name = "resultsLayoutPanel";
             this.resultsLayoutPanel.RowCount = 1;
             this.resultsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.resultsLayoutPanel.Size = new System.Drawing.Size(673, 229);
+            this.resultsLayoutPanel.Size = new System.Drawing.Size(745, 289);
             this.resultsLayoutPanel.TabIndex = 0;
             // 
             // menuStrip1
@@ -124,7 +124,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(703, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(775, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStripMain";
             // 
@@ -155,9 +155,9 @@
             // 
             this.statusStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStripMain.Location = new System.Drawing.Point(0, 375);
+            this.statusStripMain.Location = new System.Drawing.Point(0, 443);
             this.statusStripMain.Name = "statusStripMain";
-            this.statusStripMain.Size = new System.Drawing.Size(703, 22);
+            this.statusStripMain.Size = new System.Drawing.Size(775, 22);
             this.statusStripMain.TabIndex = 7;
             this.statusStripMain.Text = "statusStripMain";
             // 
@@ -172,7 +172,7 @@
             this.flowLayoutPanelProposes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelProposes.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelProposes.Name = "flowLayoutPanelProposes";
-            this.flowLayoutPanelProposes.Size = new System.Drawing.Size(589, 14);
+            this.flowLayoutPanelProposes.Size = new System.Drawing.Size(661, 22);
             this.flowLayoutPanelProposes.TabIndex = 8;
             // 
             // groupBoxSuggestions
@@ -182,7 +182,7 @@
             this.groupBoxSuggestions.Controls.Add(this.flowLayoutPanelProposes);
             this.groupBoxSuggestions.Location = new System.Drawing.Point(15, 56);
             this.groupBoxSuggestions.Name = "groupBoxSuggestions";
-            this.groupBoxSuggestions.Size = new System.Drawing.Size(595, 33);
+            this.groupBoxSuggestions.Size = new System.Drawing.Size(667, 41);
             this.groupBoxSuggestions.TabIndex = 8;
             this.groupBoxSuggestions.TabStop = false;
             this.groupBoxSuggestions.Text = "Suggestions";
@@ -191,7 +191,7 @@
             // 
             this.cbSuggestions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSuggestions.AutoSize = true;
-            this.cbSuggestions.Location = new System.Drawing.Point(619, 68);
+            this.cbSuggestions.Location = new System.Drawing.Point(691, 72);
             this.cbSuggestions.Name = "cbSuggestions";
             this.cbSuggestions.Size = new System.Drawing.Size(55, 17);
             this.cbSuggestions.TabIndex = 9;
@@ -202,7 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 397);
+            this.ClientSize = new System.Drawing.Size(775, 465);
             this.Controls.Add(this.cbSuggestions);
             this.Controls.Add(this.groupBoxSuggestions);
             this.Controls.Add(this.statusStripMain);
