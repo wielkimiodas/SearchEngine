@@ -33,7 +33,7 @@ namespace SearchEngine.Solver
             if (path == null) throw new ArgumentNullException("path");
 
             var allText = File.ReadAllText(path);
-            var keywordsArray = allText.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+            var keywordsArray = allText.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             var keywords = new List<Keyword>();
 
             var stemmer = new PorterStemmer();
@@ -41,7 +41,7 @@ namespace SearchEngine.Solver
             foreach (var keywordElem in keywordsArray)
             {
                 var stemmed = stemmer.stemTerm(keywordElem);
-                var keyword = new Keyword {Value = keywordElem, ValueStemmed = stemmed};
+                var keyword = new Keyword { Value = keywordElem, ValueStemmed = stemmed };
                 keywords.Add(keyword);
             }
 

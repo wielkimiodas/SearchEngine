@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using LAIR.Collections.Generic;
 using LAIR.ResourceAPIs.WordNet;
 using SearchEngine.Solver.Model;
@@ -76,7 +75,7 @@ namespace SearchEngine.Solver
                             occ++;
                     }
                 }
-                var idf = occ == 0 ? 0 : Math.Log10(docAmount / (double)occ);
+                var idf = occ == 0 ? 0 : Math.Log10(docAmount/(double) occ);
                 InverseDocumentFrequency.Add(key, idf);
             }
         }
@@ -96,7 +95,7 @@ namespace SearchEngine.Solver
         public List<string> ProposeSimilarQueries(string originalQuery)
         {
             var synSetSynonyms = new Set<SynSet>();
-            foreach (WordNetEngine.POS wordType in Enum.GetValues(typeof(WordNetEngine.POS)))
+            foreach (WordNetEngine.POS wordType in Enum.GetValues(typeof (WordNetEngine.POS)))
             {
                 if (wordType != WordNetEngine.POS.None)
                 {
@@ -123,7 +122,7 @@ namespace SearchEngine.Solver
 
             foreach (var synonym in synonyms)
             {
-                var list = synonym.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                var list = synonym.Split(new[] {'_'}, StringSplitOptions.RemoveEmptyEntries).ToList();
                 var stemmedList = list.Select(stemmer.stemTerm).ToList();
 
                 stemmedSynonyms.Add(

@@ -34,6 +34,10 @@
     <Reference Include="LAIR.Collections">
       <HintPath>..\..\contrib\WordNet 3.0\libs\LAIR.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="LAIR.ResourceAPIs.WordNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\contrib\WordNet 3.0\libs\LAIR.ResourceAPIs.WordNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -63,12 +67,6 @@
     <Content Include="input\keywords.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\WordNet\WordNet\WordNet.csproj">
-      <Project>{F4C6C48C-90EF-445D-B8F8-AD9B6767D9A8}</Project>
-      <Name>WordNet</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
