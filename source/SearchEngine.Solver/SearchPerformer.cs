@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LAIR.Collections.Generic;
-using LAIR.ResourceAPIs.WordNet;
 using SearchEngine.Solver.Model;
 using SearchEngine.Solver.Stemmer;
+using SearchEngine.WordNet;
 
 namespace SearchEngine.Solver
 {
