@@ -72,7 +72,7 @@ namespace SearchEngine.ClientApp
             }
         }
 
-        private string GetFilePathToOpen()
+        private static string GetFilePathToOpen()
         {
             string path = null;
             var dlg = new OpenFileDialog();

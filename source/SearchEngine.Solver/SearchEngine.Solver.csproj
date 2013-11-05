@@ -41,6 +41,7 @@
     <Compile Include="DataReader.cs" />
     <Compile Include="DocumentValueEstimator.cs" />
     <Compile Include="Model\Document.cs" />
+    <Compile Include="Model\Synonym.cs" />
     <Compile Include="Model\TfidfBase.cs" />
     <Compile Include="Model\Keyword.cs" />
     <Compile Include="Model\Query.cs" />
@@ -56,16 +57,10 @@
     <Content Include="input\documents.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\documentsFruit.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="input\keywords-lab1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="input\keywords.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="input\keywordsFruit.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

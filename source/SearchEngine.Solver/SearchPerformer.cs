@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using LAIR.Collections.Generic;
 using LAIR.ResourceAPIs.WordNet;
 using SearchEngine.Solver.Model;
+using SearchEngine.Solver.Stemmer;
 
 namespace SearchEngine.Solver
 {
@@ -114,7 +117,37 @@ namespace SearchEngine.Solver
                 }
             }
             synonyms.Remove(originalQuery.ToLowerInvariant());
-            return synonyms;
+
+            var stemmedSynonyms = new List<Synonym>();
+            var stemmer = new PorterStemmer();
+
+            foreach (var synonym in synonyms)
+            {
+                var list = synonym.Split(new[] {'_'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+                var stemmedList = list.Select(stemmer.stemTerm).ToList();
+
+                stemmedSynonyms.Add(
+                    new Synonym()
+                    {
+                        ValueList = list,
+                        ValueStemmedList = stemmedList
+                    });
+            }
+            
+            //remove suggestions which does not fit the keywords
+
+            foreach (var stemmedSynonym in stemmedSynonyms.ToList())
+            {
+                if (!stemmedSynonym.ValueStemmedList.All(x => keywords.Exists(y=>y.ValueStemmed==x)))
+                {
+                    stemmedSynonyms.Remove(stemmedSynonym);
+                }
+            }
+
+            var res = stemmedSynonyms.Select(x=>string.Join(" ",x.ValueList)).ToList();
+                //x => String.Join(" ", x)).ToString();
+
+            return res;
         }
     }
 }

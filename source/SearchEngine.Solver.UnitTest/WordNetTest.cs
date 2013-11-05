@@ -18,7 +18,7 @@ namespace SearchEngine.Solver.UnitTest
             string b = a.Substring(0, a.IndexOf("source"));
             string c = Path.Combine(b, @"contrib\WordNet 3.0\dict");
             WordNetEngine wordNetEngine = new WordNetEngine(c, false);
-            string txt = "availability";
+            string txt = "sex";
             Set<SynSet> synSetsToShow = wordNetEngine.GetSynSets(txt, WordNetEngine.POS.Adjective);
             synSetsToShow.AddRange(wordNetEngine.GetSynSets(txt, WordNetEngine.POS.Adverb));
             synSetsToShow.AddRange(wordNetEngine.GetSynSets(txt, WordNetEngine.POS.Noun));
