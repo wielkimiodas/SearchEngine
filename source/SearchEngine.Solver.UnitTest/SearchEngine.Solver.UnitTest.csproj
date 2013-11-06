@@ -57,9 +57,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\contrib\WordNet 3.0\libs\LAIR.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="LAIR.ResourceAPIs.WordNet">
-      <HintPath>..\..\contrib\WordNet 3.0\libs\LAIR.ResourceAPIs.WordNet.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
